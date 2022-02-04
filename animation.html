@@ -1,0 +1,49 @@
+<!DOTYPEhtml>
+<html>
+ <head>
+   <title>Animation</title>
+
+ </head>
+
+ <body>
+  <h1 id="heading">Family!</h1>
+
+ <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+ <script>
+    var leftOffset = 0;
+    var topOffset = 0;
+
+    var moveHeading = function () {
+      $("#heading").offset({
+        left: leftOffset
+      });
+
+      leftOffset++;
+
+      if (leftOffset > 1040) {
+        $("#heading").offset({
+        top: topOffset
+      });
+        topOffset++;
+        leftOffset--;
+      }
+
+      if (topOffset > 490) {
+        $("#heading").offset({
+        left: leftOffset
+      });
+        topOffset--;
+        leftOffset++;
+
+        leftOffset = 150;
+        topOffset = 125;
+      }
+  };
+
+
+  var move = setInterval(moveHeading, 0,1);
+  var stop = $("h1").click(clearInterval(move));
+ </script>
+  </body>
+ </html>

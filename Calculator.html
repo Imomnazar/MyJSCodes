@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+</head>
+<body>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+	<script>
+
+			var one = prompt("Number one");
+			var two = prompt("Number two");
+			var sign = prompt("Sign");
+			
+			if (one === "+" || one === "-" || one === "*" || one === "/" || two === "+" || two === "-" || two === "*" || two === "/"){
+				alert("Write number!");
+			} else{
+
+			if (sign === "+") {
+				alert((+one) + (+two));
+			}
+			if (sign === "-") {
+				alert((one - two));
+			}
+			if (sign === "/") {
+				if (one === "0" && two !== "0"){
+					alert("Сannot be divided by zero!");
+				}else{
+				alert((one / two));
+				}
+			}
+			if (sign === "*") {
+				alert((one * two));
+			}
+			if (sign === "0"){
+				alert("It's not sign!");
+			}
+		}
+		
+		if (confirm("Do you try again?")) {
+ 			location.reload();
+ 		}
+
+	</script>
+</body>
+</html>

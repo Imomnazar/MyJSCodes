@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Find the buried treasure!</title>
+
+ </head>
+
+ <body>
+  <h1 id="heading">Find the buried treasure!</h1>
+
+ <img id="map" width=400 height=400 src="treasuremap.png">
+
+ <p id="distance"></p>
+ 
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+ <script>
+ var getRandomNumber = function (size) {
+ 	return Math.floor(Math.random() * size);
+ };
+
+ var getDistance = function (event, target) {
+ 	var diffX = event.offsetX - target.x;
+ 	var diffY = event.offsetY - target.y;
+ 	return Math.sqrt((diffX * diffX) + (diffY * diffY));
+ };
+
+ var getDistanceHint = function (distence) {
+ 	if (distence < 10) {
+ 		return "Boiling hot!";
+ 	} else if (distence < 20) {
+ 		return "Really hot";
+ 	} else if (distence < 40) {
+ 		return "Hot";
+ 	} else if (distence < 80) {
+ 		return "Warm";
+ 	} else if (distence < 160) {
+ 		return "Cold";
+ 	} else if (distence < 320) {
+ 		return "Really cold";
+ 	} else if (distence < 450) {
+ 		return "Really really cold!";
+  	} else {
+ 		return "Freezing!";
+ 	}
+ };
+
+ var width = 400;
+ var height = 400;
+ var clicks = 0;
+
+ var target = {
+ 	x: getRandomNumber(width),
+ 	y: getRandomNumber(height)
+ };
+
+
+ $("#map").click(function (event) {
+ 	clicks++;
+
+ 	var distence = getDistance(event, target);
+
+ 	var distenceHint = getDistanceHint(distence);
+
+ 	$("#distance").text(distenceHint);
+
+
+ 	if (distence < 8) {
+ 		alert("Foind the treasure in " + clicks + " clicks!");
+ 	}
+ });
+ </script>
+  </body>
+ </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Football</title>
+</head>
+<body>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+	<canvas id="canvas" width="400" height="400"></canvas>
+
+	<script>
+		
+
+		var canvas = document.getElementById("canvas");
+		var gates = canvas.getContext("2d");
+		gates.lineWidth=4;
+		gates.beginPath();
+		gates.moveTo(10,20);
+		gates.lineTo(10,200);
+		gates.moveTo(10,20);
+		gates.lineTo(300,20);
+		gates.lineTo(300,200);
+		gates.stroke();
+
+			var ball = gates.beginPath();
+			gates.arc(10,10,10,0,Math.PI * 2, false);
+			gates.fill();
+			$("canvas").click(function (event) {
+            $("#ball").offset({
+              left: event.pageX,
+              top: event.pageY
+            });
+          });
+
+
+
+	</script>
+
+</body>
+</html>

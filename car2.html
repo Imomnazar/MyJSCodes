@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Cars</title>
+</head>
+
+<body>
+
+   <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+   <canvas id="canvas" width="600" height="600"></canvas>
+
+   <script>
+
+      var score = 0;
+      var score2 = 0;
+      var x1 = 200;
+      var y1 = 200;
+
+
+      var drawScore = function (d) {
+         if (d) {
+            ctx.font = "20px Courier";
+            ctx.fillStyle = "Red";
+            ctx.textAlign = "left";
+            ctx.textBaseline = "top";
+            ctx.fillText("Score: " + score, 10, 10);
+         } else {
+            ctx.font = "20px Courier";
+            ctx.fillStyle = "Blue";
+            ctx.textAlign = "right";
+            ctx.textBaseline = "top";
+            ctx.fillText("Score: " + score2, 580, 10);
+         }
+
+      };
+      var Car = function (x, y) {
+         this.x = x;
+         this.y = y;
+         this.xSpeed = 0;
+         this.ySpeed = 0;
+      };
+
+      Car.prototype.equal = function (n) {
+         if (n) {
+            if (this.x > x1) {
+               if (this.x < 400) {
+                  if (this.y > y1 - 30) {
+                     if (this.y < 400) {
+                        this.x = 10;
+                        this.y = 10;
+                        score = 0;
+                     }
+                  }
+               }
+            }
+         } else {
+            if (this.x > x1) {
+               if (this.x < 400) {
+                  if (this.y > y1 - 30) {
+                     if (this.y < 400) {
+                        this.x = 10;
+                        this.y = 10;
+                        score2 = 0;
+                     }
+                  }
+               }
+            }
+         }
+
+      };
+      Car.prototype.win = function (a) {
+         if (a) {
+            ctx.clearRect(x1, y1, width - 400, height - 400);
+            ctx.font = "60px Courier";
+            ctx.fillStyle = "Red";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("Tesla win", width / 2, height / 2);
+         } else {
+            ctx.clearRect(x1, y1, width - 400, height - 400);
+            ctx.font = "60px Courier";
+            ctx.fillStyle = "Blue";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("BMW win", width / 2, height / 2);
+         }
+
+      }
+
+      var nopravlenie = 0;
+      var nopravlenie1 = 0;
+      Car.prototype.scorePlus = function (c) {
+         if (c) {
+            ctx.fillStyle = "Gray";
+            ctx.fillRect(200, 200, width - 400, height - 400);
+            if (score > 4) {
+               score = 4;
+               score2 = 0;
+               tesla.win(true);
+            }
+            if (this.x < x1) {
+               if (this.y < y1) {
+                  nopravlenie = 1;
+               }
+               if (nopravlenie = 1) {
+               if (this.x > x1) {
+               	if (this.y < y1){
+               		nopravlenie = 2;
+               	}
+               }
+           	}
+           	if (nopravlenie = 2) {
+               if (this.x > x1){
+               		if (this.y > y1) {
+               			nopravlenie = 3;
+               		}
+               	}
+               }
+               if (nopravlenie = 3) {
+               	if (this.x < x1) {
+               		if (this.y < y1) {
+               			nopravlenie = 4;
+               		}
+               	}
+               }
+               
+               	if (nopravlenie = 4) {
+               		score = score + 1;
+               		nopravlenie = 0;
+
+               	}
+            }
+         } else {
+            ctx.fillStyle = "Gray";
+            ctx.fillRect(200, 200, width - 400, height - 400);
+            if (score2 > 500) {
+               score = 0;
+               score2 = 500;
+               bmw.win(false);
+            }
+
+            if (this.x < x1) {
+               if (this.y < y1) {
+                  score2 = score2 + 1;
+               }
+            }
+         }
+
+      }
+
+      Car.prototype.move = function () {
+         this.x += this.xSpeed;
+         this.y += this.ySpeed;
+
+         if (this.x < 0) {
+            this.x = 0;
+         } else if (this.x > width - 110) {
+            this.x = width - 110;
+         }
+         if (this.y < 0) {
+            this.y = 0;
+         } else if (this.y > height - 40) {
+            this.y = height - 40;
+         }
+
+      };
+
+      Car.prototype.draw = function (color1) {
+         ctx.fillStyle = color1;
+         ctx.beginPath();
+         ctx.moveTo(this.x, this.y);
+         ctx.lineTo(this.x, this.y + 20);
+         ctx.moveTo(this.x, this.y);
+         ctx.lineTo(this.x + 30, this.y);
+         ctx.lineTo(this.x + 40, this.y - 20);
+         ctx.lineTo(this.x + 70, this.y - 20);
+         ctx.lineTo(this.x + 80, this.y);
+         ctx.lineTo(this.x + 110, this.y);
+         ctx.lineTo(this.x + 110, this.y + 20);
+         ctx.lineTo(this.x, this.y + 20);
+         ctx.fill();
+         ctx.fillStyle = "Black";
+         ctx.beginPath();
+         ctx.arc(this.x + 15, this.y + 20, 10, 0, Math.PI * 2, true);
+         ctx.arc(this.x + 95, this.y + 20, 10, 0, Math.PI * 2, true);
+         ctx.fill();
+      };
+
+      Car.prototype.setDirection = function (direction, move) {
+         if (move) {
+            if (direction === "up") {
+               this.xSpeed = 0;
+               this.ySpeed = -5;
+            } else if (direction === "down") {
+               this.xSpeed = 0;
+               this.ySpeed = 5;
+            } else if (direction === "left") {
+               this.xSpeed = -5;
+               this.ySpeed = 0;
+            } else if (direction === "right") {
+               this.xSpeed = 5;
+               this.ySpeed = 0;
+            }
+         } else {
+            if (direction === "up1") {
+               this.xSpeed = 0;
+               this.ySpeed = -5;
+            } else if (direction === "down1") {
+               this.xSpeed = 0;
+               this.ySpeed = 5;
+            } else if (direction === "left1") {
+               this.xSpeed = -5;
+               this.ySpeed = 0;
+            } else if (direction === "right1") {
+               this.xSpeed = 5;
+               this.ySpeed = 0;
+            }
+         }
+      };
+
+
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      var width = canvas.width;
+      var height = canvas.height;
+
+      var tesla = new Car(30, 50);
+      var bmw = new Car(50, 90);
+
+      var keyActions = {
+         37: "left",
+         38: "up",
+         39: "right",
+         40: "down",
+         65: "left1",
+         87: "up1",
+         68: "right1",
+         83: "down1"
+      }
+
+      $("body").keydown(function (event) {
+         var direction = keyActions[event.keyCode];
+         tesla.setDirection(direction, true);
+         bmw.setDirection(direction, false);
+      });
+
+      setInterval(function () {
+         ctx.clearRect(0, 0, width, height);
+         tesla.draw("Red");
+         tesla.move();
+         tesla.equal(true);
+         tesla.scorePlus(true);
+         bmw.draw("Blue");
+         bmw.move();
+         bmw.scorePlus(false);
+         bmw.equal(false);
+         drawScore(true);
+         drawScore(false);
+
+
+         ctx.strokeRect(0, 0, width, height);
+      }, 30);
+
+
+
+   </script>
+
+</body>
+
+</html>

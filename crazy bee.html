@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crazy Bee</title>
+</head>
+<body>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+	<canvas id="canvas" width="200" height="200"></canvas>
+
+	<script>
+
+		var update = function (coordinate){
+			var offset = Math.random() * 10 - 5;
+			coordinate += offset;
+
+			if (coordinate > width || coordinate > height) {
+				coordinate = 200;
+			}
+
+			if (coordinate < 0) {
+				coordinate = 0;
+			}
+
+			return coordinate;
+		}
+		var circle = function (x,y,radius,fill) {
+			ctx.beginPath();
+			ctx.arc(x,y,radius,0,Math.PI * 2, false);
+			if (fill) {
+				ctx.fill();
+			} else{
+			ctx.stroke();
+			}
+		}
+		 var bee = function(x, y, radius) {
+		 	ctx.lineWidth = 2;
+		 	ctx.strokeStyle = "Black";
+		 	ctx.fillStyle = "Gold";
+
+		 	circle(x, y, radius, true);
+		 	circle(x, y, radius, false);
+		 	circle(x - 5, y - 11, radius - 3, false);
+		 	circle(x + 5, y - 11, radius - 3, false);
+		 	circle(x - 2, y - 1, radius - 6 , false);
+		 	circle(x + 2, y - 1, radius - 6 , false);
+		 }
+
+
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		var width = canvas.width;
+		var height = canvas.height;
+		var x = width / 2;
+		var y = height / 2;
+		var radius = 8; 
+		setInterval(function () {
+			ctx.clearRect(0,0,width,height);
+			bee(x,y,radius);
+			x = update(x);
+			y = update(y);
+
+			ctx.strokeRect(0,0,width,height);
+		}, 30);
+	</script>
+
+</body>
+</html>

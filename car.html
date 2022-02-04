@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cars</title>
+</head>
+
+<body>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+	<script>
+		var Car = function (x, y) {
+			this.x = x;
+			this.y = y;
+		};
+
+		var drawCar = function (Car) {
+			var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+			var carElement = $(carHtml);
+
+			carElement.css({
+				position: "absolute",
+				left: Car.x,
+				top: Car.y
+			});
+
+			$("body").append(carElement);
+		};
+
+		var tesla = new Car(30, 50);
+		var bmw = new Car(50, 90);
+
+		drawCar(tesla);
+		drawCar(bmw);
+
+	</script>
+
+</body>
+
+</html>

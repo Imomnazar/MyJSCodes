@@ -1,0 +1,31 @@
+<!DOTYPEhtml>
+<html>
+ <head>
+   <title>Dinosaur RUN!</title>
+
+ </head>
+
+ <body>
+  <h1 id="head">Cklike to jump!</h1>
+  <img id="dinosaur"width=100 heidh=100 src="dino.png">
+  <img id="kaktus"width=50 heidh=50 src="Kaktus.png">
+
+ <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+ <script>
+  var score = 0;
+  var topOffset = 110;
+  var click = function () {
+    if ($("html").click){
+      $("#dinosaur").offset({top:topOffset});
+      topOffset++;
+    }
+      if (topOffset = 35) {
+        topOffset = 110;
+        score++
+        topOffset!+;
+      }
+  };
+ </script>
+  </body>
+ </html>    

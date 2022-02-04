@@ -1,0 +1,61 @@
+<!DOTYPEhtml>
+<html>
+ <head>
+   <title>"Шибениця"!</title>
+ </head>
+
+ <body>
+ 	<h1 id="player-name">Player1!</h1>
+  <h1>"Шибениця"</h1>
+
+ <script>
+ 	var words = [
+ 	"javascript",
+ 	"monkey",
+ 	"dovud",
+ 	"irfon",
+ 	"java",
+ 	"banana",
+ 	"sister"
+ ];
+ var word = words[Math.floor(Math.random() * words.length)];
+ var answerArray = [];
+ for(var i = 0; i < word.length; i++) {
+ 	answerArray[i] = "_";
+ }
+
+ var remainingLetters = word.length;
+
+ while(remainingLetters > 0) {
+ 	alert(answerArray.join(" "));
+
+ 	var guess = prompt("Guess a letter, or click Cancel to stop game.");
+ 	if (guess === null) {
+
+ 		break;
+ 	} else if (guess.length !== 1) {
+ 	  alert("Please enter a single letter.");
+ 	} else {
+ 	  for(var j = 0; j < word.length; j++) {
+ 	    if (word[j] === guess) {
+ 	    	if (guess === answerArray[j]) {
+ 	    	alert("Guess another letter!");
+ 	    	remainingLetters++;
+ 	    }
+ 	    	answerArray[j] = guess;
+ 	    	remainingLetters--;
+ 	    } 
+ 	  }		
+ 	}	
+ }
+
+ alert(answerArray.join(" "));
+ alert("Good job! The answer was " + word);
+
+ var headingElement = document.getElementById("player-name");
+console.log(headingElement.innerHTML);
+var newHeadingText = prompt("Please provide a new heading:");
+headingElement.innerHTML = newHeadingText;
+ </script>
+ </body>
+ </html>

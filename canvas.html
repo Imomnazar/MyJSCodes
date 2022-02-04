@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas</title>
+</head>
+<body>
+
+	<canvas id="canvas" width="400" height="400"></canvas>
+
+	<script>
+		
+		var canvas = document.getElementById("canvas");
+		var person = canvas.getContext("2d");
+
+		person.lineWidth = 4
+		person.strokeRect(20,0,20,20);
+		person.beginPath();
+		person.moveTo(30,20);
+		person.lineTo(30,70);	
+		person.moveTo(0,25);
+		person.lineTo(30,40);
+		person.moveTo(30,40);
+		person.lineTo(60,25);
+		person.moveTo(30,70);
+		person.lineTo(0,90);
+		person.moveTo(30,70);
+		person.lineTo(60,90);	
+		person.stroke();
+
+	</script>
+
+</body>
+</html>

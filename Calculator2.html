@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+</head>
+<body>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<canvas id="canvas" width="400" height="400"></canvas>
+
+	<script>
+
+			var canvas = document.getElementById("canvas");
+			var calculator = canvas.getContext("2d");
+			calculator.fillStyle = "Gainsboro";
+			calculator.fillRect(100,0,280,400);
+			calculator.fillStyle = "GhostWhite ";
+			calculator.fillRect(110,10,260,100);
+			calculator.fillRect(110,120,50,50);
+			calculator.fillRect(170,120,50,50);
+			calculator.fillRect(230,120,50,50);
+			calculator.beginPath();
+			calculator.arc(340,145,25,0, Math.PI * 2, false);
+			calculator.arc(340,215,25,0, Math.PI * 2, false);
+			calculator.arc(340,285,25,0, Math.PI * 2, false);
+			calculator.arc(340,355,25,0, Math.PI * 2, false);
+			calculator.fill();
+			calculator.fillRect(110,190,50,50);
+			calculator.fillRect(170,190,50,50);
+			calculator.fillRect(230,190,50,50);
+			calculator.fillRect(110,260,50,50);
+			Acalculator.fillRect(170,260,50,50);
+			calculator.fillRect(230,260,50,50);
+			calculator.fillRect(110,330,50,50);
+			calculator.fillRect(170,330,110,50);
+			calculator.strokeStyle = "Black";
+			calculator.lineWidth = 4;
+			calculator.beginPath();
+			calculator.moveTo(135,305);
+			calculator.lineTo(135,265);
+			calculator.lineTo(120,280);
+			calculator.arc(340,285,25,0, (Math.PI * 3 / 2) - 45 , false);
+			calculator.stroke();
+
+	</script>
+</body>
+</html>

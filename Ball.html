@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Keyboard input</title>
+</head>
+<body>
+
+	<canvas id="canvas" width="1350" height="640"></canvas>
+
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+	<script>
+		
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var width = canvas.width;
+		var height = canvas.height;
+
+		var circle = function (x,y,radius,a) {
+			var radiuses = radius;
+			ctx.beginPath();
+			ctx.arc(x,y, radius, 0, Math.PI * 2, true);
+			if (a){
+				ctx.fill();
+			}else{
+				ctx.stroke();
+			}
+		};
+
+		var Ball = function() {
+			this.x = width / 2;
+			this.y = height / 2;
+			this.speed = 5;
+			this.size = 10;
+			this.xSpeed = 5;
+			this.ySpeed = 0;
+		};
+
+		Ball.prototype.move = function() {
+			this.x += this.xSpeed * this.speed;
+			this.y += this.ySpeed * this.speed;
+
+			if (this.x < 0 || this.x > width) {
+        this.xSpeed = -this.xSpeed;
+      } else if (this.y < 0 || this.y > height) {
+        this.ySpeed = -this.ySpeed;
+      }
+		};
+
+		Ball.prototype.draw = function() {
+			circle(this.x, this.y, this.size, true);
+		};
+
+		Ball.prototype.setDirection = function(direction) {
+			if (direction === "up"){
+				this.xSpeed = 0;
+				this.ySpeed = -5;
+			} else if (direction === "down"){
+				this.xSpeed = 0;
+				this.ySpeed = 5;
+			} else if (direction === "left"){
+				this.xSpeed = -5;
+				this.ySpeed = 0;
+			} else if (direction === "right"){
+				this.xSpeed = 5;
+				this.ySpeed = 0;
+			} else if (direction === "stop"){
+				this.xSpeed = 0;
+				this.ySpeed = 0;
+			} else if (direction === "faster") {
+        		this.speed++;
+     		} else if (direction === "slower") {
+        		if (this.speed > 0) {
+          		this.speed--;
+		        }
+		    } else if (direction === "small") {
+		    	this.size --;
+		    } else if (direction === "big") {
+		    	this.size ++;
+		    }
+		};
+
+		var ball = new Ball();
+
+
+		var keyActions = {
+			32: "stop",
+			37: "left",
+			38: "up",
+			39: "right",
+			40: "down",
+			90: "slower",
+			88: "faster",
+			67: "small",
+			86: "big"
+		};
+
+
+
+		$("body").keydown(function (event) {
+			var direction = keyActions[event.keyCode];
+			ball.setDirection(direction);
+		});
+
+
+		setInterval(function() {
+			ctx.clearRect(0,0, width, height);
+
+			ball.draw();
+			ball.move();
+
+			ctx.strokeRect(0,0, width, height);
+		}, 30);
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>circle</title>
+</head>
+<body>
+
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<script>
+	
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+
+	var circle = function (x,y, radius) {
+		ctx.beginPath();
+		ctx.arc(x,y,radius,0,Math.PI*2,false);
+		ctx.stroke();
+	};
+	function style (color) {
+		ctx.strokeStyle = "color";
+	}
+
+	ctx.lineWidth = 4;
+
+	circle(100,100,10);
+	style("Yellow");
+	circle(100,100,20);
+	style();
+	circle(100,100,30);
+	style();
+	circle(100,100,40);
+	style();
+	circle(100,100,50);
+	style();
+	circle(100,100,60);
+
+
+</script>
+
+</body>
+</html>
